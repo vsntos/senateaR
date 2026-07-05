@@ -4,13 +4,11 @@
 \alias{get_senate_parliamentary_entries}
 \title{Fetch Senate Parliamentary Entries ("Asuntos Entrados")}
 \usage{
-get_senate_parliamentary_entries(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoAsuntosEntrados/json"
-)
+get_senate_parliamentary_entries(url = NULL)
 }
 \arguments{
-\item{url}{Character. The JSON endpoint URL (default is the official Senado Argentina source).}
+\item{url}{Character. The JSON endpoint URL. Defaults to the official
+Senado Argentina parliamentary-entries endpoint when \code{NULL}.}
 }
 \value{
 A tibble containing:

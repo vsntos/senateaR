@@ -3,7 +3,8 @@
 #' Retrieves the list of documents describing parliamentary entries ("Asuntos Entrados")
 #' from the Argentine Senate. Returns session dates and corresponding PDF download URLs.
 #'
-#' @param url Character. The JSON endpoint URL (default is the official Senado Argentina source).
+#' @param url Character. The JSON endpoint URL. Defaults to the official
+#'   Senado Argentina parliamentary-entries endpoint when `NULL`.
 #' @return A tibble containing:
 #' \describe{
 #'   \item{meeting_date}{The date of the parliamentary session.}
@@ -15,9 +16,10 @@
 #' entries <- get_senate_parliamentary_entries()
 #' print(head(entries))
 #' }
-get_senate_parliamentary_entries <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoAsuntosEntrados/json"
-) {
+get_senate_parliamentary_entries <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoAsuntosEntrados/json"
+  }
   txt <- httr::content(httr::GET(url), as = "text", encoding = "UTF-8")
 
   urls <- stringr::str_match_all(txt, '"URL":\\s*"([^"]+)"')[[1]][,2]

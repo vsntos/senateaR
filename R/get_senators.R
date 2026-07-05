@@ -4,7 +4,8 @@
 #' Argentine Senate open-data endpoint, parses the JSON response, and
 #' returns a tibble with selected senator attributes.
 #'
-#' @param url Character. API endpoint URL (default from Senado Argentina).
+#' @param url Character. API endpoint URL. Defaults to the official
+#'   Senado Argentina current-senators endpoint when `NULL`.
 #'
 #' @return A tibble with one row per senator and the following columns:
 #' \describe{
@@ -34,9 +35,10 @@
 #' }
 #'
 #' @export
-get_senators <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadores/json"
-) {
+get_senators <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadores/json"
+  }
   resp <- httr::GET(url)
   httr::stop_for_status(resp)
   dat <- jsonlite::fromJSON(httr::content(resp, as = "text", encoding = "UTF-8"))

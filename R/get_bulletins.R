@@ -3,7 +3,8 @@
 #' Safely retrieves session bulletins from the Argentine Senate by parsing
 #' malformed JSON with regex and string processing.
 #'
-#' @param url Character. Source URL (default: bulletins API).
+#' @param url Character. Source URL. Defaults to the official Senado
+#'   Argentina bulletins endpoint when `NULL`.
 #' @return A tibble with session date, bulletin number, and PDF URL.
 #' @export
 #' @examples
@@ -12,9 +13,10 @@
 #' head(bulletins)
 #' }
 
-get_bulletins <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoBoletinNovedades/json"
-) {
+get_bulletins <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoBoletinNovedades/json"
+  }
   txt <- httr::content(httr::GET(url), as = "text", encoding = "UTF-8")
 
   urls <- stringr::str_match_all(txt, '"URL":\\s*"([^"]+)"')[[1]][,2]

@@ -4,13 +4,11 @@
 \alias{get_bulletins}
 \title{Fetch Senate Bulletins (Robust Fallback)}
 \usage{
-get_bulletins(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoBoletinNovedades/json"
-)
+get_bulletins(url = NULL)
 }
 \arguments{
-\item{url}{Character. Source URL (default: bulletins API).}
+\item{url}{Character. Source URL. Defaults to the official Senado
+Argentina bulletins endpoint when \code{NULL}.}
 }
 \value{
 A tibble with session date, bulletin number, and PDF URL.

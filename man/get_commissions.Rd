@@ -4,13 +4,11 @@
 \alias{get_commissions}
 \title{Fetch Argentine Senate Commissions}
 \usage{
-get_commissions(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoComisiones/json/todas"
-)
+get_commissions(url = NULL)
 }
 \arguments{
-\item{url}{Character. API endpoint URL (default provided).}
+\item{url}{Character. API endpoint URL. Defaults to the official
+Senado Argentina commissions endpoint when \code{NULL}.}
 }
 \value{
 A tibble with one row per commission and the following columns:

@@ -4,7 +4,8 @@
 #' Argentine Senate open-data endpoint. It parses the document details including
 #' opening date, object description, and related document links.
 #'
-#' @param url Character. JSON endpoint URL (default to Senado Argentina source).
+#' @param url Character. JSON endpoint URL. Defaults to the official
+#'   Senado Argentina procurements endpoint when `NULL`.
 #' @return A tibble with one row per procurement notice and the following columns:
 #' \describe{
 #'   \item{opening_date}{Date and time the notice was opened.}
@@ -22,9 +23,10 @@
 #' procurements <- get_senate_procurements()
 #' head(procurements)
 #' }
-get_senate_procurements <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoLicitaciones/json"
-) {
+get_senate_procurements <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoLicitaciones/json"
+  }
   txt <- httr::content(httr::GET(url), as = "text", encoding = "UTF-8")
 
   # Fix duplicated double quotes in the OBJETO field

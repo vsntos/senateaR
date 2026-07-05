@@ -4,13 +4,11 @@
 \alias{get_senate_stenographic_versions}
 \title{Fetch Senate Stenographic Versions}
 \usage{
-get_senate_stenographic_versions(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoVersionesTac/json"
-)
+get_senate_stenographic_versions(url = NULL)
 }
 \arguments{
-\item{url}{Character. JSON endpoint URL (default points to official source).}
+\item{url}{Character. JSON endpoint URL. Defaults to the official
+Senado Argentina stenographic-versions endpoint when \code{NULL}.}
 }
 \value{
 A tibble with columns: session_date, session_type, session_number,

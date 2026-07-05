@@ -3,7 +3,8 @@
 #' Retrieves the full historical list of Argentine senators, including their
 #' legal and real tenure periods, province, party, and additional notes.
 #'
-#' @param url Character. JSON endpoint for historical senators (default from Senado Argentina).
+#' @param url Character. JSON endpoint for historical senators. Defaults to
+#'   the official Senado Argentina endpoint when `NULL`.
 #'
 #' @return A tibble with one row per senator term and the following columns:
 #' \describe{
@@ -15,7 +16,7 @@
 #'   \item{end_real}{Actual end date (ISO format).}
 #'   \item{province}{Province or district represented.}
 #'   \item{party_or_alliance}{Political party or alliance.}
-#'   \item{replacement}{Replacer information (if any).}
+#'   \item{replacement}{Information about the replacement senator (if any).}
 #'   \item{notes}{Observations or special circumstances.}
 #' }
 #'
@@ -26,9 +27,10 @@
 #' }
 #'
 #' @export
-get_senators_historical <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadoresHistorico/json"
-) {
+get_senators_historical <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadoresHistorico/json"
+  }
   resp <- httr::GET(url)
   httr::stop_for_status(resp)
   dat <- jsonlite::fromJSON(httr::content(resp, as = "text", encoding = "UTF-8"))

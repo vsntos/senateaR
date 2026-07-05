@@ -3,7 +3,8 @@
 #' This function retrieves all current Senate commissions from the
 #' Argentine Senate open-data API, including both unicameral and bicameral types.
 #'
-#' @param url Character. API endpoint URL (default provided).
+#' @param url Character. API endpoint URL. Defaults to the official
+#'   Senado Argentina commissions endpoint when `NULL`.
 #'
 #' @return A tibble with one row per commission and the following columns:
 #' \describe{
@@ -18,9 +19,10 @@
 #' }
 #'
 #' @export
-get_commissions <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoComisiones/json/todas"
-) {
+get_commissions <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoComisiones/json/todas"
+  }
   resp <- httr::GET(url)
   httr::stop_for_status(resp)
   dat <- jsonlite::fromJSON(httr::content(resp, as = "text", encoding = "UTF-8"))
@@ -28,8 +30,8 @@ get_commissions <- function(
 
   df <- dplyr::as_tibble(rows) %>%
     dplyr::rename(
-      name = NOMBRE,
-      type = TIPO_COMISION
+      name = "NOMBRE",
+      type = "TIPO_COMISION"
     )
 
   df

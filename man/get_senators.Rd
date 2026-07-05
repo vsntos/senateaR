@@ -4,13 +4,11 @@
 \alias{get_senators}
 \title{Fetch Current Argentine Senators}
 \usage{
-get_senators(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadores/json"
-)
+get_senators(url = NULL)
 }
 \arguments{
-\item{url}{Character. API endpoint URL (default from Senado Argentina).}
+\item{url}{Character. API endpoint URL. Defaults to the official
+Senado Argentina current-senators endpoint when \code{NULL}.}
 }
 \value{
 A tibble with one row per senator and the following columns:

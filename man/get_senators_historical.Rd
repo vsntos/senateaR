@@ -4,13 +4,11 @@
 \alias{get_senators_historical}
 \title{Fetch Historical Argentine Senators}
 \usage{
-get_senators_historical(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoSenadoresHistorico/json"
-)
+get_senators_historical(url = NULL)
 }
 \arguments{
-\item{url}{Character. JSON endpoint for historical senators (default from Senado Argentina).}
+\item{url}{Character. JSON endpoint for historical senators. Defaults to
+the official Senado Argentina endpoint when \code{NULL}.}
 }
 \value{
 A tibble with one row per senator term and the following columns:
@@ -23,7 +21,7 @@ A tibble with one row per senator term and the following columns:
 \item{end_real}{Actual end date (ISO format).}
 \item{province}{Province or district represented.}
 \item{party_or_alliance}{Political party or alliance.}
-\item{replacement}{Replacer information (if any).}
+\item{replacement}{Information about the replacement senator (if any).}
 \item{notes}{Observations or special circumstances.}
 }
 }

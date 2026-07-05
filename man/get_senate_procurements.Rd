@@ -4,13 +4,11 @@
 \alias{get_senate_procurements}
 \title{Fetch Senate Procurement Notices ("Licitaciones")}
 \usage{
-get_senate_procurements(
-  url =
-    "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoLicitaciones/json"
-)
+get_senate_procurements(url = NULL)
 }
 \arguments{
-\item{url}{Character. JSON endpoint URL (default to Senado Argentina source).}
+\item{url}{Character. JSON endpoint URL. Defaults to the official
+Senado Argentina procurements endpoint when \code{NULL}.}
 }
 \value{
 A tibble with one row per procurement notice and the following columns:

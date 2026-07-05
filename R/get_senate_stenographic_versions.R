@@ -3,7 +3,8 @@
 #' Retrieves stenographic session transcripts from the Argentine Senate. Returns the session date,
 #' type, session number, meeting number, and download URL of the transcript (version taquigrafica).
 #'
-#' @param url Character. JSON endpoint URL (default points to official source).
+#' @param url Character. JSON endpoint URL. Defaults to the official
+#'   Senado Argentina stenographic-versions endpoint when `NULL`.
 #' @return A tibble with columns: session_date, session_type, session_number,
 #' meeting_number, and url.
 #' @export
@@ -12,9 +13,10 @@
 #' transcripts <- get_senate_stenographic_versions()
 #' head(transcripts)
 #' }
-get_senate_stenographic_versions <- function(
-    url = "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoVersionesTac/json"
-) {
+get_senate_stenographic_versions <- function(url = NULL) {
+  if (is.null(url)) {
+    url <- "https://www.senado.gob.ar/micrositios/DatosAbiertos/ExportarListadoVersionesTac/json"
+  }
   txt <- httr::content(httr::GET(url), as = "text", encoding = "UTF-8")
 
   dates <- stringr::str_match_all(txt, '"FECHA DE SESION":\\s*"([^"]+)"')[[1]][,2]

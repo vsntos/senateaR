@@ -60,7 +60,7 @@ get_senate_votes <- function(years = c("2024"), step = 100, max_pages = 10) {
 
   all_data <- all_data %>%
     dplyr::mutate(
-      session_date_raw = .data$`Fecha de Sesión`,
+      session_date_raw = .data[["Fecha de Sesi\u00f3n"]],
       session_date = stringr::str_extract(.data$session_date_raw, "\\d{2}/\\d{2}/\\d{4}"),
       session_date = lubridate::dmy(.data$session_date),
       Resultado = stringr::str_trim(.data$Resultado)
