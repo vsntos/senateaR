@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^quality_reports$
+^\.github$
+^README\.Rmd$
+^cran-comments\.md$
+^\.DS_Store$
+^\.Rhistory$
+^\.RData$
+^LICENSE\.md$

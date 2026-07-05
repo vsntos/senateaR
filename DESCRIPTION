@@ -1,0 +1,35 @@
+Package: senateaR
+Title: Access Open Data from the Argentine Senate
+Version: 0.1.0
+Authors@R: person("Vinicius", "Santos", email = "santos.vinicius18@gmail.com",
+    role = c("aut", "cre"))
+Description: Provides functions to fetch and parse open data published by the
+    Argentine Senate ("Senado de la Nacion Argentina"), including current and
+    historical senators, voting records and vote details, commissions,
+    session bulletins, procurement notices ("licitaciones"), parliamentary
+    entries ("asuntos entrados"), and stenographic transcripts. Data are
+    retrieved directly from the Senate's public open-data portal and website.
+License: MIT + file LICENSE
+URL: https://github.com/vsntos/senateaR
+BugReports: https://github.com/vsntos/senateaR/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    dplyr,
+    glue,
+    httr,
+    jsonlite,
+    lubridate,
+    magrittr,
+    purrr,
+    rlang,
+    rvest,
+    stringr,
+    tibble
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
